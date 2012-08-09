@@ -21,5 +21,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 
-#import "NSTimer+radex.h"
-#import "NSView+radex.h"
+#import <Cocoa/Cocoa.h>
+
+@interface RPFlippedView : NSView
+
+@end

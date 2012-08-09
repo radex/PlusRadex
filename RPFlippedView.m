@@ -1,5 +1,5 @@
 // 
-// Copyright (c) 2010-2012 Radosław Pietruszewski, http://radexp.pl
+// Copyright (c) 2012 Radosław Pietruszewski, http://radexp.pl
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -21,19 +21,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 
-@interface NSView (radex)
+#import "RPFlippedView.h"
 
-- (int) x;
-- (int) y;
-- (int) w;
-- (int) h;
+@implementation RPFlippedView
 
-- (void) setX:(int)newX;
-- (void) setY:(int)newY;
-- (void) setW:(int)newW;
-- (void) setH:(int)newH;
-
-- (void) logFrame;
-- (void) logBounds;
+- (BOOL)isFlipped
+{
+    return YES;
+}
 
 @end

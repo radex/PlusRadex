@@ -70,4 +70,12 @@
     NSLog(@"(%d, %d) %d x %d", self.x, self.y, self.w, self.h);
 }
 
+- (void)logBounds
+{
+    NSSize size = self.bounds.size;
+    NSPoint origin = self.bounds.origin;
+    
+    NSLog(@"(%f, %f) %f x %f", origin.x, origin.y, size.width, size.height);
+}
+
 @end
