@@ -26,5 +26,6 @@
 @interface NSGradient (radex)
 
 + (NSGradient*) from:(NSColor*)startingColor to:(NSColor*)endingColor;
++ (void) drawFrom:(NSColor*)startingColor to:(NSColor*)endingColor angle:(CGFloat)angle inRect:(NSRect)frame inset:(float)inset radius:(float)radius;
 
 @end

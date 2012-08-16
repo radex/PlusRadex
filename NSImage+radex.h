@@ -25,6 +25,8 @@
 
 @interface NSImage (radex)
 
-- (void)drawing:(void(^)(NSRect frame))drawingBlock;
++ (NSImage*)imageSized:(NSSize)size;
+- (NSImage*)drawing:(void(^)(NSRect frame))drawingBlock;
+- (NSColor*)asColor;
 
 @end

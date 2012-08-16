@@ -22,12 +22,24 @@
 //
 
 #import "NSGradient+radex.h"
+#import "NSBezierPath+radex.h"
 
 @implementation NSGradient (radex)
 
 + (NSGradient *)from:(NSColor *)startingColor to:(NSColor *)endingColor
 {
     return [[NSGradient alloc] initWithStartingColor:startingColor endingColor:endingColor];
+}
+
++ (void)drawFrom:(NSColor *)startingColor to:(NSColor *)endingColor angle:(CGFloat)angle inRect:(NSRect)frame inset:(float)inset radius:(float)radius
+{
+    [NSGraphicsContext saveGraphicsState];
+    
+    NSBezierPath *path = [NSBezierPath setRect:frame inset:inset radius:radius];
+    
+    [[NSGradient from:startingColor to:endingColor] drawInRect:path.bounds angle:angle];
+    
+    [NSGraphicsContext restoreGraphicsState];
 }
 
 @end

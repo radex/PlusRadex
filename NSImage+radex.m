@@ -25,7 +25,12 @@
 
 @implementation NSImage (radex)
 
-- (void)drawing:(void(^)(NSRect frame))drawingBlock
++ (NSImage *)imageSized:(NSSize)size
+{
+    return [[NSImage alloc] initWithSize:size];
+}
+
+- (NSImage*)drawing:(void(^)(NSRect frame))drawingBlock
 {
     [self lockFocus];
     [NSGraphicsContext saveGraphicsState];
@@ -34,6 +39,13 @@
     
     [NSGraphicsContext restoreGraphicsState];
     [self unlockFocus];
+    
+    return self;
+}
+
+- (NSColor *)asColor
+{
+    return [NSColor colorWithPatternImage:self];
 }
 
 @end

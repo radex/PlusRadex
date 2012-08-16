@@ -25,12 +25,12 @@
 
 NSColor* RGB(float r, float g, float b)
 {
-    return [NSColor colorWithCalibratedRed:r green:g blue:b alpha:1.0];
+    return [NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0];
 }
 
 NSColor* RGBA(float r, float g, float b, float a)
 {
-    return [NSColor colorWithCalibratedRed:r green:g blue:b alpha:a];
+    return [NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a];
 }
 
 @implementation NSColor (radex)
