@@ -33,13 +33,7 @@
 
 + (void)drawFrom:(NSColor *)startingColor to:(NSColor *)endingColor angle:(CGFloat)angle inRect:(NSRect)frame inset:(float)inset radius:(float)radius
 {
-    [NSGraphicsContext saveGraphicsState];
-    
-    NSBezierPath *path = [NSBezierPath setRect:frame inset:inset radius:radius];
-    
-    [[NSGradient from:startingColor to:endingColor] drawInRect:path.bounds angle:angle];
-    
-    [NSGraphicsContext restoreGraphicsState];
+    [[NSGradient from:startingColor to:endingColor] drawInBezierPath:[NSBezierPath rect:frame inset:inset radius:radius] angle:angle];
 }
 
 @end

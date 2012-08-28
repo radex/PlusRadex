@@ -23,6 +23,11 @@
 
 #import "NSview+radex.h"
 
+void RPLogRect(NSRect rect)
+{
+    NSLog(@"(%f,%f) %fx%f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+}
+
 @implementation NSView (radex)
 
 - (int) x

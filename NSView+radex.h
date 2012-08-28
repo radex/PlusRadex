@@ -21,6 +21,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 
+void RPLogRect(NSRect rect);
+
 @interface NSView (radex)
 
 - (int) x;
