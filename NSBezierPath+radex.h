@@ -28,4 +28,43 @@
 + (NSBezierPath*) rect:(NSRect)frame inset:(float)inset radius:(float)radius;
 + (NSBezierPath*) setRect:(NSRect)frame inset:(float)inset radius:(float)radius;
 
+#pragma mark -
+#pragma mark Constructing paths
+
+/*
+ Equivalents of:
+ [path moveToPoint:NSMakePoint(x,y)];
+ [path relativeMoveToPoint:NSMakePoint(x,y)];
+ [path lineToPoint:NSMakePoint(x,y)];
+ [path relativeLineToPoint:NSMakePoint(x,y)];
+ */
+
+- (void) setX:(CGFloat)x Y:(CGFloat)y;      // moves current point to (x,y)
+
+- (void) mx:(CGFloat)x y:(CGFloat)y;        // moves current point by (x,y), relatively to the current point
+- (void) mx:(CGFloat)x;                     // moves current point by (x,0), relatively to the current point
+- (void) my:(CGFloat)y;                     // moves current point by (0,y), relatively to the current point
+
+- (void) lineToX:(CGFloat)x Y:(CGFloat)y;   // draws line from current point to (x,y)
+
+- (void) lx:(CGFloat)x y:(CGFloat)y;        // draws line to the point (x,y) relative to the current point
+- (void) lx:(CGFloat)x;                     // draws line to the point (x,0) relative to the current point
+- (void) ly:(CGFloat)y;                     // draws line to the point (0,y) relative to the current point
+
+/*
+ Draws a rounded corner (as specified in argument) with `radius` radius
+ 
+ Note that it only works if you do drawing in counterclockwise manner
+ */
+
+typedef enum
+{
+    BottomLeft,
+    BottomRight,
+    TopRight,
+    TopLeft
+} RPCorner;
+
+- (void) corner:(RPCorner)corner radius:(CGFloat)radius;
+
 @end

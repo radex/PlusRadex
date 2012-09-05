@@ -37,4 +37,83 @@
     return path;
 }
 
+#pragma mark -
+#pragma mark Constructing paths
+
+- (void) setX:(CGFloat)x Y:(CGFloat)y
+{
+    [self moveToPoint:NSMakePoint(x, y)];
+}
+
+- (void) mx:(CGFloat)x y:(CGFloat)y
+{
+    [self relativeMoveToPoint:NSMakePoint(x, y)];
+}
+
+- (void) mx:(CGFloat)x
+{
+    [self relativeMoveToPoint:NSMakePoint(x, 0)];
+}
+
+- (void) my:(CGFloat)y
+{
+    [self relativeMoveToPoint:NSMakePoint(0, y)];
+}
+
+- (void) lineToX:(CGFloat)x Y:(CGFloat)y
+{
+    [self lineToPoint:NSMakePoint(x, y)];
+}
+
+- (void) lx:(CGFloat)x y:(CGFloat)y
+{
+    [self relativeLineToPoint:NSMakePoint(x, y)];
+}
+
+- (void) lx:(CGFloat)x
+{
+    [self relativeLineToPoint:NSMakePoint(x, 0)];
+}
+
+- (void) ly:(CGFloat)y
+{
+    [self relativeLineToPoint:NSMakePoint(0, y)];
+}
+
+/*
+ rounded corners
+ */
+
+- (void) corner:(RPCorner)corner radius:(CGFloat)r
+{
+    NSPoint middle,end;
+    middle = end = [self currentPoint];
+    
+    switch(corner)
+    {
+        case BottomLeft:
+            middle.y -= r;
+            end.y -= r;
+            end.x += r;
+            break;
+        case BottomRight:
+            middle.x += r;
+            end.x += r;
+            end.y += r;
+            break;
+        case TopRight:
+            middle.y += r;
+            end.y += r;
+            end.x -= r;
+            break;
+        case TopLeft:
+            middle.x -= r;
+            end.x -= r;
+            end.y -= r;
+            break;
+    }
+    
+    [self appendBezierPathWithArcFromPoint:middle toPoint:end radius:r];
+}
+
 @end
