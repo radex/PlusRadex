@@ -54,7 +54,9 @@
 /*
  Draws a rounded corner (as specified in argument) with `radius` radius
  
- Note that it only works if you do drawing in counterclockwise manner
+ - corner:radius:        Works if you do drawing on non-flipped view in counterclockwise manner
+ - flippedCorner:radius: Same as corner:radius:, but appropriate for flipped views and clockwise drawing
+ 
  */
 
 typedef enum
@@ -66,5 +68,6 @@ typedef enum
 } RPCorner;
 
 - (void) corner:(RPCorner)corner radius:(CGFloat)radius;
+- (void) flippedCorner:(RPCorner)corner radius:(CGFloat)radius;
 
 @end

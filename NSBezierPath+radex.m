@@ -116,4 +116,16 @@
     [self appendBezierPathWithArcFromPoint:middle toPoint:end radius:r];
 }
 
+- (void)flippedCorner:(RPCorner)corner radius:(CGFloat)radius
+{
+    RPCorner corner2;
+    
+    if(corner == BottomLeft)    corner2 = TopLeft;
+    if(corner == BottomRight)   corner2 = TopRight;
+    if(corner == TopLeft)       corner2 = BottomLeft;
+    if(corner == TopRight)      corner2 = BottomRight;
+    
+    [self corner:corner2 radius:radius];
+}
+
 @end
