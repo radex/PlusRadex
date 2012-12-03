@@ -29,4 +29,10 @@
 - (NSImage*)drawing:(void(^)(NSRect frame))drawingBlock;
 - (NSColor*)asColor;
 
+/*
+ Backwards compatible version of 10.8's imageWithSize:flipped:drawingHandler:
+ */
+
++ (id)imageSized:(NSSize)size flipped:(BOOL)flipped drawing:(void (^)(NSRect frame))drawingHandler;
+
 @end

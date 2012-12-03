@@ -48,4 +48,21 @@
     return [NSColor colorWithPatternImage:self];
 }
 
++ (id)imageSized:(NSSize)size flipped:(BOOL)flipped drawing:(void (^)(NSRect))drawingHandler
+{
+    if([NSImage respondsToSelector:@selector(imageWithSize:flipped:drawingHandler:)])
+    {
+        return [NSImage imageWithSize:size flipped:flipped drawingHandler:^BOOL(NSRect frame)
+        {
+            drawingHandler(frame);
+            
+            return YES;
+        }];
+    }
+    else
+    {
+        return [[NSImage imageSized: size] drawing:drawingHandler];
+    }
+}
+
 @end
