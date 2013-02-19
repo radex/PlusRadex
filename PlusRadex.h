@@ -31,3 +31,4 @@
 #import "RPFlippedView.h"
 #import "RPImageButtonCell.h"
 #import "CATransaction+radex.h"
+#import "RPSingleton.h"
