@@ -23,6 +23,11 @@
 
 #import <Foundation/Foundation.h>
 
+//#define RPSingletonLog1(str, ...) NSLog([@"(RPSingleton) " stringByAppendingString:str], __VA_ARGS__);
+//#define RPSingletonLog2(str, ...) NSLog([@"(RPSingleton) " stringByAppendingString:str], __VA_ARGS__);
+#define RPSingletonLog1(...)
+#define RPSingletonLog2(...)
+
 /*
  
  To make a global object, add <RPSingleton> protocol in class interface
@@ -54,10 +59,12 @@
 \
 + (id) allocWithZone:(NSZone *)zone\
 {\
+    RPSingletonLog1(@"Alloc: %@", self); \
     static id globalInstance;\
     \
     if(!globalInstance)\
     {\
+        RPSingletonLog2(@"Alloc once: %@", self);\
         globalInstance = [super allocWithZone:zone];\
     }\
     \
@@ -66,6 +73,7 @@
 \
 + (instancetype) s\
 {\
+    RPSingletonLog1(@"s: %@", self);\
     return [[self allocWithZone:nil] init];\
 }
 
@@ -90,11 +98,13 @@
 #define RP_InitOnce(...) \
 - (id)init\
 {\
+    RPSingletonLog1(@"Init: %@", self);\
     static BOOL didInit;\
     if(!didInit)\
     {\
         if(self = [super init])\
         {\
+            RPSingletonLog2(@"Init once: %@", self);\
             __VA_ARGS__\
             didInit = YES;\
         }\
@@ -120,10 +130,12 @@
 #define RP_AwakeFromNibOnce(...) \
 - (void)awakeFromNib\
 {\
+    RPSingletonLog1(@"Awake: %@", self);\
     static BOOL didAwake;\
     \
     if(!didAwake)\
     {\
+        RPSingletonLog2(@"Awake once: %@", self);\
         __VA_ARGS__\
         didAwake = YES;\
     }\

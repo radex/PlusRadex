@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2012 Radosław Pietruszewski, http://radexp.pl
+// Copyright (c) 2012-2013 Radosław Pietruszewski, http://radexp.pl
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -33,6 +33,19 @@ NSColor* RGBA(float r, float g, float b, float a)
     return [NSColor colorWithDeviceRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a];
 }
 
-@implementation NSColor (radex)
+NSColor* hexColor(int hex)
+{
+    return hexaColor(hex, 1.0);
+}
 
-@end
+NSColor* hexaColor(int hex, float a)
+{
+    int r = (hex & 0xff0000) >> 16;
+    int g = (hex & 0x00ff00) >> 8;
+    int b = (hex & 0x0000ff);
+    
+    return [NSColor colorWithDeviceRed:r / 255.0
+                                 green:g / 255.0
+                                  blue:b / 255.0
+                                 alpha:a];
+}

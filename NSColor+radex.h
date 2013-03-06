@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2012 Radosław Pietruszewski, http://radexp.pl
+// Copyright (c) 2012-2013 Radosław Pietruszewski, http://radexp.pl
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -25,7 +25,5 @@
 
 NSColor* RGB(float r, float g, float b);
 NSColor* RGBA(float r, float g, float b, float a);
-
-@interface NSColor (radex)
-
-@end
+NSColor* hexColor(int hex);
+NSColor* hexaColor(int hex, float a);
