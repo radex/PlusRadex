@@ -25,6 +25,24 @@
 
 @interface NSTimer (radex)
 
-+ (NSTimer *)fireBlock:(void(^)(void))block in:(NSTimeInterval)seconds;
+/*
+ Shorthand versions of scheduledTimerWithTimeInterval:invocation:repeats:
+ 
+ Usage:
+ 
+ [NSTimer in:2 do:^{ ... }];
+ [NSTimer every:5 do:^
+ {
+    ...
+ }];
+ 
+ */
+
++ (instancetype) in:(NSTimeInterval)seconds do:(void(^)())work;
++ (instancetype) every:(NSTimeInterval)seconds do:(void(^)())work;
+
+// old syntax
+
++ (NSTimer *)fireBlock:(void(^)(void))block in:(NSTimeInterval)seconds __attribute__((deprecated));
 
 @end

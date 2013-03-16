@@ -25,27 +25,26 @@
 
 @implementation NSTimer (radex)
 
-+ (NSTimer *)fireBlock:(void(^)(void))block in:(NSTimeInterval)seconds
++ (instancetype) in:(NSTimeInterval)seconds do:(void (^)())work
 {
-    NSInvocation *invocation =
-    [NSInvocation invocationWithMethodSignature:[self instanceMethodSignatureForSelector:@selector(_fireBlock:)]];
-
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:seconds invocation:invocation repeats:NO];
-
-    [invocation setTarget:timer];
-    [invocation setSelector:@selector(_fireBlock:)];
-
-    void (^block2)(void) = [block copy];
-
-    [invocation setArgument:&block2 atIndex:2];
-
-    return timer;
+    return [NSTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(_fireBlock:) userInfo:[work copy] repeats:NO];
 }
 
-
-- (void)_fireBlock:(void(^)(void))block
++ (instancetype) every:(NSTimeInterval)seconds do:(void (^)())work
 {
+    return [NSTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(_fireBlock:) userInfo:[work copy] repeats:YES];
+}
+
++ (void) _fireBlock:(NSTimer *)timer
+{
+    void (^block)() = timer.userInfo;
+    
     block();
+}
+
++ (NSTimer *)fireBlock:(void(^)(void))block in:(NSTimeInterval)seconds
+{
+    return [NSTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(_fireBlock:) userInfo:[block copy] repeats:NO];
 }
 
 @end
