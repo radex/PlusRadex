@@ -1,5 +1,5 @@
 // 
-// Copyright (c) 2010-2012 Radosław Pietruszewski, http://radexp.pl
+// Copyright (c) 2010-2013 Radosław Pietruszewski, http://radexp.pl
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -23,64 +23,73 @@
 
 #import "NSview+radex.h"
 
-void RPLogRect(NSRect rect)
+void RPLogRect(NSString *note, NSRect rect)
 {
-    NSLog(@"(%f,%f) %fx%f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+    NSLog(@"%@: (%f,%f) %f⨉%f", note, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
 }
 
 @implementation NSView (radex)
 
-- (int) x
+/*
+ shorthands to operations on view's frame struct members
+ */
+
+@dynamic x, y, w, h, size, origin;
+
+- (CGFloat)x { return self.frame.origin.x; }
+- (CGFloat)y { return self.frame.origin.y; }
+- (CGFloat)w { return self.frame.size.width; }
+- (CGFloat)h { return self.frame.size.height; }
+- (NSSize)size { return self.frame.size; }
+- (NSPoint)origin { return self.frame.origin; }
+
+- (void)setX:(CGFloat)x
 {
-    return self.frame.origin.x;
+    NSRect frame = self.frame;
+    frame.origin.x = x;
+    self.frame = frame;
 }
 
-- (int) y
+- (void)setY:(CGFloat)y
 {
-    return self.frame.origin.y;
+    NSRect frame = self.frame;
+    frame.origin.y = y;
+    self.frame = frame;
 }
 
-- (int) w
+- (void)setW:(CGFloat)w
 {
-    return self.frame.size.width;
+    NSRect frame = self.frame;
+    frame.size.width = w;
+    self.frame = frame;
 }
 
-- (int) h
+- (void)setH:(CGFloat)h
 {
-    return self.frame.size.height;
+    NSRect frame = self.frame;
+    frame.size.height = h;
+    self.frame = frame;
 }
 
-- (void) setX:(int)newX
+- (void)setSize:(NSSize)size
 {
-    self.frame = NSMakeRect(newX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+    NSRect frame = self.frame;
+    frame.size = size;
+    self.frame = frame;
 }
 
-- (void) setY:(int)newY
+- (void)setOrigin:(NSPoint)origin
 {
-    self.frame = NSMakeRect(self.frame.origin.x, newY, self.frame.size.width, self.frame.size.height);
+    NSRect frame = self.frame;
+    frame.origin = origin;
+    self.frame = frame;
 }
 
-- (void) setW:(int)newW
-{
-    self.frame = NSMakeRect(self.frame.origin.x, self.frame.origin.y, newW, self.frame.size.height);
-}
+// debugging
 
-- (void) setH:(int)newH
+- (void)logFrame:(NSString *)note
 {
-    self.frame = NSMakeRect(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newH);
-}
-
-- (void)logFrame
-{
-    NSLog(@"(%d, %d) %d x %d", self.x, self.y, self.w, self.h);
-}
-
-- (void)logBounds
-{
-    NSSize size = self.bounds.size;
-    NSPoint origin = self.bounds.origin;
-    
-    NSLog(@"(%f, %f) %f x %f", origin.x, origin.y, size.width, size.height);
+    RPLogRect(note, self.frame);
 }
 
 @end

@@ -1,5 +1,5 @@
 // 
-// Copyright (c) 2010-2012 Radosław Pietruszewski, http://radexp.pl
+// Copyright (c) 2010-2013 Radosław Pietruszewski, http://radexp.pl
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -21,21 +21,21 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 
-void RPLogRect(NSRect rect);
+void RPLogRect(NSString *note, NSRect rect);
 
 @interface NSView (radex)
 
-- (int) x;
-- (int) y;
-- (int) w;
-- (int) h;
+// shorthands to operations on view's frame struct members
 
-- (void) setX:(int)newX;
-- (void) setY:(int)newY;
-- (void) setW:(int)newW;
-- (void) setH:(int)newH;
+@property (nonatomic) CGFloat x;
+@property (nonatomic) CGFloat y;
+@property (nonatomic) CGFloat w;
+@property (nonatomic) CGFloat h;
+@property (nonatomic) NSSize size;
+@property (nonatomic) NSPoint origin;
 
-- (void) logFrame;
-- (void) logBounds;
+// debugging
+
+- (void) logFrame:(NSString*)note;
 
 @end
